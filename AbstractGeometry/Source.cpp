@@ -119,11 +119,13 @@ namespace Geometry
 		}
 		void info()const
 		{
-			cout << "Квадрат:\n";
-			cout << "Длина:	  " << side << endl;
-			cout << "Площадь: " << get_area() << endl;
-			cout << "Периметр:" << get_perimeter() << endl;
+			cout << "Квадрат:\n"
+				<< "Длина:	  " << side << endl
+				<< "Площадь:  " << get_area() << endl 
+				<< "Периметр: " << get_perimeter() << endl;
 			draw();
+			cout << endl;
+
 		}
 	};
 
@@ -185,12 +187,14 @@ namespace Geometry
 
 		void info()const
 		{
-			cout << "Прямоугольник:\n";
-			cout << "Длина:	  " << length << endl;
-			cout << "Ширина:  " << width << endl;
-			cout << "Площадь: " << get_area() << endl;
-			cout << "Периметр:" << get_perimeter() << endl;
+			cout << "Прямоугольник:\n"
+				<< "Длина:	  " << length << endl
+				<< "Ширина:   " << width << endl
+				<< "Площадь:  " << get_area() << endl 
+				<< "Периметр: " << get_perimeter() << endl;
 			draw();
+			cout << endl;
+
 		}
 	};
 
@@ -263,29 +267,30 @@ namespace Geometry
 		}
 		void info()const
 		{
-			cout << "Треугольник:\n";
-			cout << "Длина:	  " << side << endl;
-			cout << "Площадь: " << get_area() << endl;
-			cout << "Периметр:" << get_perimeter() << endl;
+			cout << "Треугольник:\n" 
+				<< "Длина:    " << side << endl 
+				<< "Площадь:  " << get_area() << endl 
+				<< "Периметр: " << get_perimeter() << endl 
+				<< "Высота:   " << get_height() << endl;
 			draw();
+			cout << endl;
 		}
 	};
 }
 
 void main()
 {
+	
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD buffer = { 16,16 };
 	//SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, &buffer);
 	setlocale(LC_ALL, "");
 	//Shape shape(Color::console_blue);
-	Geometry::Square square(250, Geometry::Color::green, 100, 100, 5);
-	Geometry::Rectangle rec(Geometry::Color::red, 400, 200, 500, 700, 5);
-	Geometry::EquilateralTriangle tri(Geometry::Color::blue, 250, 100, 100, 5);
+	Geometry::Square square(250, Geometry::Color::green, 100, 200, 5);
+	Geometry::Rectangle rec(Geometry::Color::red, 400, 200, 300, 400, 5);
+	Geometry::EquilateralTriangle tri(Geometry::Color::blue, 250, 700, 700, 5);
 	square.info();
-	system("pause");
 	rec.info();
-	//system("pause");
 	tri.info();
 
 }
