@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1082
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Inheritance", "Inheritance\Inheritance.vcxproj", "{40907277-D426-4B6C-9DF1-3A6FEFB666A7}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AcademyAnton", "AcademyAnton\AcademyAnton.vcxproj", "{C8A388A4-CDBD-41D2-A655-C7E596A09386}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AbstractBaseClass", "AbstractBaseClass\AbstractBaseClass.vcxproj", "{9C547EB4-1AF9-45B1-8FE0-146C84DFD338}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AbstractGeometry", "AbstractGeometry\AbstractGeometry.vcxproj", "{CAFED7D8-A44B-4784-BD51-422CDEBFCCC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,14 @@ Global
 		{9C547EB4-1AF9-45B1-8FE0-146C84DFD338}.Release|x64.Build.0 = Release|x64
 		{9C547EB4-1AF9-45B1-8FE0-146C84DFD338}.Release|x86.ActiveCfg = Release|Win32
 		{9C547EB4-1AF9-45B1-8FE0-146C84DFD338}.Release|x86.Build.0 = Release|Win32
+		{CAFED7D8-A44B-4784-BD51-422CDEBFCCC4}.Debug|x64.ActiveCfg = Debug|x64
+		{CAFED7D8-A44B-4784-BD51-422CDEBFCCC4}.Debug|x64.Build.0 = Debug|x64
+		{CAFED7D8-A44B-4784-BD51-422CDEBFCCC4}.Debug|x86.ActiveCfg = Debug|Win32
+		{CAFED7D8-A44B-4784-BD51-422CDEBFCCC4}.Debug|x86.Build.0 = Debug|Win32
+		{CAFED7D8-A44B-4784-BD51-422CDEBFCCC4}.Release|x64.ActiveCfg = Release|x64
+		{CAFED7D8-A44B-4784-BD51-422CDEBFCCC4}.Release|x64.Build.0 = Release|x64
+		{CAFED7D8-A44B-4784-BD51-422CDEBFCCC4}.Release|x86.ActiveCfg = Release|Win32
+		{CAFED7D8-A44B-4784-BD51-422CDEBFCCC4}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
