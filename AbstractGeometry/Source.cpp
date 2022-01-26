@@ -241,14 +241,11 @@ namespace Geometry
 		}
 		void draw()const
 		{
-			HWND hwnd = GetDesktopWindow();
-			hwnd = GetConsoleWindow();
-			HDC hdc = GetDC(hwnd);
-
+			HWND hConsole = GetConsoleWindow();
+			HDC hdc = GetDC(hConsole);
 			HPEN hPen = CreatePen(PS_SOLID, line_width, color);
-			HBRUSH hBrush = CreateSolidBrush(color);
-
 			SelectObject(hdc, hPen);
+			HBRUSH hBrush = CreateSolidBrush(color);
 			SelectObject(hdc, hBrush);
 
 			POINT point[] =
@@ -263,7 +260,7 @@ namespace Geometry
 			DeleteObject(hBrush);
 			DeleteObject(hPen);
 
-			ReleaseDC(hwnd, hdc);
+			ReleaseDC(hConsole, hdc);
 		}
 		void info()const
 		{
