@@ -1,12 +1,12 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 #define tab "\t"
 
 class Element
 {
-	int Data;	//Значение элемента
-	Element* pNext;//Адрес следующего элемента
+	int Data;	//Р—РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°
+	Element* pNext;//РђРґСЂРµСЃ СЃР»РµРґСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р°
 public:
 	Element(int Data, Element* pNext = nullptr) :Data(Data), pNext(pNext)
 	{
@@ -19,13 +19,13 @@ public:
 	friend class ForwardList;
 };
 
-class ForwardList//Односвязный (однонаправленный) список
+class ForwardList//РћРґРЅРѕСЃРІСЏР·РЅС‹Р№ (РѕРґРЅРѕРЅР°РїСЂР°РІР»РµРЅРЅС‹Р№) СЃРїРёСЃРѕРє
 {
-	Element* Head;	//Голова списка - указывает на начальный элемент списка.
+	Element* Head;	//Р“РѕР»РѕРІР° СЃРїРёСЃРєР° - СѓРєР°Р·С‹РІР°РµС‚ РЅР° РЅР°С‡Р°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ СЃРїРёСЃРєР°.
 public:
 	ForwardList()
 	{
-		Head = nullptr;//Если голова указывает на 0, то список пуст.
+		Head = nullptr;//Р•СЃР»Рё РіРѕР»РѕРІР° СѓРєР°Р·С‹РІР°РµС‚ РЅР° 0, С‚Рѕ СЃРїРёСЃРѕРє РїСѓСЃС‚.
 		cout << "LConstructor:\t" << this << endl;
 	}
 	~ForwardList()
@@ -36,16 +36,16 @@ public:
 	//					Addigng elements:
 	void push_front(int Data)
 	{
-		Element* New = new Element(Data);//Создаем новый элемент и помещаем в него значение Data
-		New->pNext = Head;	//Привязывем новый элемент к началу списка
-		Head = New;	//Переводим Голову на новый элемент
+		Element* New = new Element(Data);//РЎРѕР·РґР°РµРј РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚ Рё РїРѕРјРµС‰Р°РµРј РІ РЅРµРіРѕ Р·РЅР°С‡РµРЅРёРµ Data
+		New->pNext = Head;	//РџСЂРёРІСЏР·С‹РІРµРј РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚ Рє РЅР°С‡Р°Р»Сѓ СЃРїРёСЃРєР°
+		Head = New;	//РџРµСЂРµРІРѕРґРёРј Р“РѕР»РѕРІСѓ РЅР° РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚
 	}
 
 	void push_back(int Data)
 	{
 		if (Head == nullptr)    return push_front(Data);
 		Element* Temp = Head;
-		while (Temp->pNext)    Temp = Temp->pNext; //Пока не 0, идем до конца списка						 	
+		while (Temp->pNext)    Temp = Temp->pNext; //РџРѕРєР° РЅРµ 0, РёРґРµРј РґРѕ РєРѕРЅС†Р° СЃРїРёСЃРєР°						 	
 		Temp->pNext = new Element(Data);
 	}
 	//					Delete elements:
@@ -75,13 +75,13 @@ public:
 	{
 		int a = 2;
 		int* pa = &a;
-		Element* Temp = Head;	//Temp - это итератор.
-		//Итератор - это указатель, при помощи которого можно получить доступ 
-		//к элементам структуры данных.
-		while (Temp)//Пока Итератор содержит ненулевой адрес.
+		Element* Temp = Head;	//Temp - СЌС‚Рѕ РёС‚РµСЂР°С‚РѕСЂ.
+		//РС‚РµСЂР°С‚РѕСЂ - СЌС‚Рѕ СѓРєР°Р·Р°С‚РµР»СЊ, РїСЂРё РїРѕРјРѕС‰Рё РєРѕС‚РѕСЂРѕРіРѕ РјРѕР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ РґРѕСЃС‚СѓРї 
+		//Рє СЌР»РµРјРµРЅС‚Р°Рј СЃС‚СЂСѓРєС‚СѓСЂС‹ РґР°РЅРЅС‹С….
+		while (Temp)//РџРѕРєР° РС‚РµСЂР°С‚РѕСЂ СЃРѕРґРµСЂР¶РёС‚ РЅРµРЅСѓР»РµРІРѕР№ Р°РґСЂРµСЃ.
 		{
 			cout << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
-			Temp = Temp->pNext;	//переход на следующий элемент
+			Temp = Temp->pNext;	//РїРµСЂРµС…РѕРґ РЅР° СЃР»РµРґСѓСЋС‰РёР№ СЌР»РµРјРµРЅС‚
 		}
 	}
 };
@@ -90,7 +90,7 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	int n;
-	cout << "Введите размер списка: "; cin >> n;
+	cout << "Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ СЃРїРёСЃРєР°: "; cin >> n;
 	ForwardList list;
 	for (int i = 0; i < n; i++)
 	{
