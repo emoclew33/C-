@@ -2,7 +2,11 @@
 
 #include<Windows.h>
 #include<iostream>
-using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
+
+#define _shape_parametrs		color, start_x, start_y, line_width
 
 /*
 ------------------------------------------------------
@@ -14,10 +18,10 @@ enum (enumeration - перечисление) - это набор именова
 namespace Geometry
 {
 	enum Color
-	{
-		red		= 0x000000FF,
-		green	= 0x0000FF00,
-		blue	= 0x00FF0000,
+	{	
+		red					= 0x000000FF,
+		green				= 0x0000FF00,
+		blue				= 0x00FF0000,
 
 		some_colore,
 		console_blue		= 0x99,
@@ -56,7 +60,7 @@ namespace Geometry
 			set_start_y(start_y);
 			set_line_width(line_width);
 		}
-		virtual ~Shape() {}
+		virtual		~Shape() {}
 
 		virtual double	 get_area()const = 0;
 		virtual double	 get_perimeter()const = 0;
@@ -80,10 +84,8 @@ namespace Geometry
 		}
 		Square(
 			double side,
-			Color color,
-			unsigned int start_x, unsigned int start_y,
-			unsigned int line_width)
-			:Shape(color, start_x, start_y, line_width)/*,side(set_side(side))*/
+			Color color, unsigned int start_x, unsigned int start_y, unsigned int line_width)
+			:Shape(_shape_parametrs)/*,side(set_side(side))*/
 		{
 			set_side(side);
 		}
@@ -154,7 +156,7 @@ namespace Geometry
 		}
 		Rectangle(Color color, double length, double width,
 			unsigned int start_x, unsigned int start_y, unsigned int line_width)
-			:Shape(color, start_x, start_y, line_width)
+			:Shape(_shape_parametrs)
 		{
 			set_length(length);
 			set_width(width);
@@ -201,7 +203,7 @@ namespace Geometry
 	class Triangle :public Shape
 	{
 	public:
-		Triangle(Color color, unsigned int start_x, unsigned int start_y, unsigned int line_width) :Shape(color, start_x, start_y, line_width) {}
+		Triangle(Color color, unsigned int start_x, unsigned int start_y, unsigned int line_width) :Shape(_shape_parametrs) {}
 		~Triangle() {}
 
 		virtual double	 get_height()const = 0;
@@ -222,7 +224,7 @@ namespace Geometry
 		}
 		EquilateralTriangle(Color color, double side,
 			unsigned int start_x, unsigned int start_y, unsigned int line_width)
-			:Triangle(color, start_x, start_y, line_width)
+			:Triangle(_shape_parametrs)
 		{
 			set_side(side);
 		}
