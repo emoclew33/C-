@@ -15,15 +15,15 @@ namespace Geometry
 {
 	enum Color
 	{
-		red = 0x000000FF,
-		green = 0x0000FF00,
-		blue = 0x00FF0000,
+		red		= 0x000000FF,
+		green	= 0x0000FF00,
+		blue	= 0x00FF0000,
 
 		some_colore,
-		console_blue = 0x99,
-		console_green = 0xAA,
-		console_red = 0xCC,
-		console_default = 0x07
+		console_blue		= 0x99,
+		console_green		= 0xAA,
+		console_red			= 0xCC,
+		console_default		= 0x07
 	};
 
 	class Shape
@@ -32,7 +32,7 @@ namespace Geometry
 		unsigned int start_x;
 		unsigned int start_y;
 		unsigned int line_width;
-		Color color;
+		Color		 color;
 	public:
 		void set_start_x(unsigned int start_x)
 		{
@@ -58,10 +58,10 @@ namespace Geometry
 		}
 		virtual ~Shape() {}
 
-		virtual double get_area()const = 0;
-		virtual double get_perimeter()const = 0;
-		virtual void draw()const = 0;
-		virtual void info()const = 0;
+		virtual double	 get_area()const = 0;
+		virtual double	 get_perimeter()const = 0;
+		virtual void	 draw()const = 0;
+		virtual void	 info()const = 0;
 	};
 
 	class Square :public Shape
@@ -204,7 +204,7 @@ namespace Geometry
 		Triangle(Color color, unsigned int start_x, unsigned int start_y, unsigned int line_width) :Shape(color, start_x, start_y, line_width) {}
 		~Triangle() {}
 
-		virtual double get_height()const = 0;
+		virtual double	 get_height()const = 0;
 	};
 	class EquilateralTriangle :public Triangle
 	{
@@ -264,7 +264,7 @@ namespace Geometry
 		}
 		void info()const
 		{
-			cout << "Треугольник:\n" 
+			cout << "Равносторонний треугольник:\n" 
 				<< "Длина:    " << side << endl 
 				<< "Площадь:  " << get_area() << endl 
 				<< "Периметр: " << get_perimeter() << endl 
@@ -273,7 +273,94 @@ namespace Geometry
 			cout << endl;
 		}
 	};
+
+	class IsoscelesTriangle : public Triangle
+	{
+		double side;
+		double base;
+	public:
+		double get_side() const
+		{
+			return side;
+		}
+		double get_base() const
+		{
+			return base;
+		}
+		double set_side(double side)
+		{
+			if (side <= 0)side = 1;
+			this->side = side;
+			return this->side;
+		}
+		double set_base(double base)
+		{
+			if (base <= 0)base = 1;
+			this->base = base;
+			return this->base;
+		}
+		IsoscelesTriangle(double side, double base, Color color) : Triangle(color, 600, 400, 5)
+		{
+			set_side(side);
+			set_base(base);
+		}
+		~IsoscelesTriangle() {}
+		double get_height() const
+		{
+			double a = sqrt(((side * side) - ((base * base) / 4)));
+			return a;
+		}
+		double get_area() const
+		{
+			return get_height() * base * 0.5;
+		}
+		double get_perimeter() const
+		{
+			return 2 * side + base;
+		}
+		void draw()const
+		{
+			HWND hwnd = GetDesktopWindow();
+			hwnd = FindWindow(NULL, L"Inheritance - Microsoft Visual Studio");
+			HDC hdc = GetDC(hwnd);
+
+			HPEN h_pen = CreatePen(PS_SOLID, 5, color);
+			HBRUSH h_brush = CreateSolidBrush(color);
+
+			SelectObject(hdc, h_pen);
+			SelectObject(hdc, h_brush);
+
+			unsigned int start_x = 600;
+			unsigned int start_y = 400;
+
+			POINT points[]
+			{
+			  {start_x + base, start_y},
+			  {start_x + base, start_y + side},
+			  {start_x , start_y + side / 2}
+			};
+
+			
+			Polygon(hdc, points, sizeof(points) / sizeof(POINT));
+		    DeleteObject(h_brush);
+			DeleteObject(h_pen);
+
+			ReleaseDC(hwnd, hdc);
+
+		}
+		void info()const
+		{
+			cout << "Равнобедренный треугольник:\n"
+				<< "Длина:    " << side << endl
+				<< "Площадь:  " << get_area() << endl
+				<< "Периметр: " << get_perimeter() << endl
+				<< "Высота:   " << get_height() << endl;
+			draw();
+			cout << endl;
+		}
+	};
 }
+
 
 void main()
 {
@@ -283,11 +370,27 @@ void main()
 	//SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, &buffer);
 	setlocale(LC_ALL, "");
 	//Shape shape(Color::console_blue);
-	Geometry::Square square(250, Geometry::Color::green, 100, 200, 5);
-	Geometry::Rectangle rec(Geometry::Color::red, 400, 200, 300, 400, 5);
-	Geometry::EquilateralTriangle tri(Geometry::Color::blue, 250, 700, 700, 5);
-	square.info();
-	rec.info();
-	tri.info();
+
+	Geometry::Shape* shaps[] =
+	{
+		new Geometry::Square(250, Geometry::Color::green, 100, 200, 5),
+		new Geometry::Rectangle(Geometry::Color::red, 400, 200, 300, 400, 5),
+		new Geometry::EquilateralTriangle(Geometry::Color::blue, 250, 700, 700, 5),
+		new Geometry::IsoscelesTriangle(30,15,Geometry::Color::blue)
+	};
+	
+	for (int i = 0; i < sizeof(shaps) / sizeof(Geometry::Shape*); i++)
+	{
+		shaps[i]->info();
+		system("pause");
+		system("cls");
+	}
+	
+	
+	for (int i = 0; i < sizeof(shaps) / sizeof(Geometry::Shape*); i++)
+	{
+		delete shaps[i];
+	}
+	
 
 }
