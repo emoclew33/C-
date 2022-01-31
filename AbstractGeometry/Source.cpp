@@ -19,9 +19,9 @@ namespace Geometry
 {
 	enum Color
 	{	
-		red					= 0x000000FF,
-		green				= 0x0000FF00,
-		blue				= 0x00FF0000,
+		red		 = 0x000000FF,
+		green	 = 0x0000FF00,
+		blue	 = 0x00FF0000,
 
 		some_colore,
 		console_blue		= 0x99,
@@ -208,6 +208,7 @@ namespace Geometry
 
 		virtual double	 get_height()const = 0;
 	};
+
 	class EquilateralTriangle :public Triangle
 	{
 		double side;
