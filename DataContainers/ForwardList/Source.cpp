@@ -46,8 +46,8 @@ public:
 	{
 		if (Head == nullptr)    return push_front(Data);
 		Element* Temp = Head;
-		while (Temp)    Temp = Temp->pNext; 					 	
-		Temp = new Element(Data);
+		while (Temp->pNext)    Temp = Temp->pNext; 					 	
+		Temp->pNext = new Element(Data);
 	}
 	//					Delete elements:
 	void pop_front()
@@ -60,15 +60,15 @@ public:
 	void pop_back()
 	{
 		Element* Temp = Head;
-		while (Temp)
+		while (Temp->pNext)
 		{
 			Element* buff = Temp->pNext;
 			if (buff->pNext == NULL) break;
 			Temp = Temp->pNext;
 		}
 
-		delete Temp;
-		Temp = nullptr;
+		delete Temp->pNext;
+		Temp->pNext = nullptr;
 	}
 
 	//					Methods:
