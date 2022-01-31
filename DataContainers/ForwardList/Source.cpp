@@ -1,7 +1,8 @@
 ﻿#include<iostream>
 using namespace std;
 
-#define tab "\t"
+#define tab			"\t"
+#define delimetr	cout << "\n________________________________________________________________\n";
 
 class Element
 {
@@ -96,10 +97,14 @@ void main()
 	{
 		list.push_front(rand() % 10);
 	}
+	delimetr
 	list.print();
+	delimetr
 	list.push_back(11);
 	list.print();
+	delimetr
 	list.pop_front();
 	list.pop_back();
 	list.print();
+	delimetr
 }
