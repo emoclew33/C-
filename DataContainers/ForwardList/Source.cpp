@@ -44,6 +44,17 @@ public:
 		size = 0;
 		cout << "LConstructor:\t" << this << endl;
 	}
+	ForwardList(const initializer_list<int>& il) : ForwardList()
+	{
+		/*for (int const* it = il.begin(); it != il.end(); it++)
+		{
+			push_back(*it);
+		}*/
+		for (int const* it = il.end() - 1; it != il.begin() - 1; it--)
+		{
+			push_front(*it);
+		}
+	}
 	ForwardList(unsigned int size) :ForwardList()
 	{
 		//this->Head = nullptr;
@@ -207,8 +218,8 @@ public:
 
 //#define BASE_CHECK
 //#define DESTRUCTOR_CHECK
-#define HOME_WORK_1
-//#define HOME_WORK_2
+//#define HOME_WORK_1
+#define HOME_WORK_2
 
 void main()
 {
@@ -292,3 +303,10 @@ void main()
 #endif // HOME_WORK_2
 
 }
+	//(ForwardList) = (initializer_list) это контейнер такой же как и наш forward list.
+//контейр - это обьект который организует хранение другит обьекто в памяти. Так же как и наш forward list, initializer list является классом,
+// и его обьекты не явно создаются всякий раз, когда мы перечисляем какие либо значения через запятую в фигурных скобках. { , , , , }
+// у любого контейнера есть методы begin и end, begin = возвращает итератор на начало контейнера, end = на конец контейнера.
+// 
+// 
+//
