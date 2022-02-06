@@ -1,5 +1,4 @@
-﻿//ForwardList
-#include<iostream>
+﻿#include<iostream>
 using namespace std;
 using std::cin;
 using std::cout;
@@ -267,16 +266,4 @@ void main()
 //	list.print();
 //#endif // HOME_WORK_2
 
-	int n;
-	cout << "Введите размер списка: "; cin >> n;
-	ForwardList list;
-	list.pop_front();
-	for (int i = 0; i < n; i++)
-	{
-		list.push_back(rand() % 2);
-	}
-	list.print();
-
-	list.unique();
-	list.print();
 }
