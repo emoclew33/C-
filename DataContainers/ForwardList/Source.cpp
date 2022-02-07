@@ -77,6 +77,7 @@ public:
 		for (int i = 0; i < index; i++)Temp = Temp->pNext;
 		return Temp->Data;
 	}
+
 	int& operator[](int index)
 	{
 		Element* Temp = Head;
@@ -88,38 +89,26 @@ public:
 	//					Addigng elements:
 	void push_front(int Data)
 	{
-		Element* New = new Element(Data);//Создаем новый элемент и помещаем в него значение Data
-		New->pNext = Head;	//Привязывем новый элемент к началу списка
-		Head = New;	//Переводим Голову на новый элемент
+		Head = new Element(Data, Head);
 		size++;
 	}
+
 	void push_back(int Data)
 	{
-		//0) Проверяем, является ли список пустым:
 		if (Head == nullptr)return push_front(Data);
-		//1) Создаем новый элемент:
-		Element* New = new Element(Data);
-		//2) Доходим до конца списка:
 		Element* Temp = Head;
-		while (Temp->pNext)//Пока, pNext текущего элемента НЕ ноль
-			Temp = Temp->pNext;//переходим на следующий элемент
-		//Теперь мы находимся в последнем элементе, т.е. Temp->pNext == nullptr
-		//3) Присоединяем новый элемент к последнему:
-		Temp->pNext = New;
+		while (Temp->pNext)Temp = Temp->pNext;
 		size++;
 	}
+
 	void insert(int index, int Data)
 	{
 		if (index == 0 || Head == nullptr)return push_front(Data);
 		if (index > size)return;
-		Element* New = new Element(Data);
-		//1) Доходим до нужного элемента:
 		Element* Temp = Head;
 		for (int i = 0; i < index - 1; i++)Temp = Temp->pNext;
-		//3) Включаем новый элемент в список:
-		New->pNext = Temp->pNext;
-		Temp->pNext = New;
-		size++;
+		Temp->pNext = new Element(Data, Temp->pNext);
+
 	}
 
 	//					Removing elements:
@@ -135,6 +124,7 @@ public:
 
 		size--;
 	}
+
 	void pop_back()
 	{
 		if (Head == nullptr)return;
@@ -148,6 +138,7 @@ public:
 		Temp->pNext = nullptr;
 		size--;
 	}
+
 	void erase(int index)
 	{
 		if (index > size)return;
@@ -169,19 +160,14 @@ public:
 	//					Methods:
 	void print()const
 	{
-		int a = 2;
-		int* pa = &a;
-		Element* Temp = Head;	//Temp - это итератор.
-		//Итератор - это указатель, при помощи которого можно получить доступ 
-		//к элементам структуры данных.
-		while (Temp)//Пока Итератор содержит ненулевой адрес.
+		for (Element* Temp = Head; Temp; Temp = Temp->pNext)
 		{
 			cout << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
-			Temp = Temp->pNext;	//переход на следующий элемент
 		}
 		cout << "Количество элементов списка: " << size << endl;
 		cout << "Общее количество элементов : " << Head->count << endl;
 	}
+
 	void unique()
 	{
 		if (Head == nullptr)return;
