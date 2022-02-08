@@ -1,4 +1,4 @@
-﻿test
+﻿adad
 #include<iostream>
 using namespace std;
 using std::cin;
@@ -110,7 +110,7 @@ public:
 		for (int i = 0; i < index - 1; i++)Temp = Temp->pNext;
 		Temp->pNext = new Element(Data, Temp->pNext);
 
-	}fafadfafsa
+	}
 
 	//					Removing elements:
 	void pop_front()
@@ -122,7 +122,7 @@ public:
 		Head = Erased->pNext;
 		//3) Удаляем элемен из памяти:
 		delete Erased;
-sdfsdfsf
+
 		size--;
 	}
 
