@@ -1,4 +1,5 @@
-﻿#include<iostream>
+﻿test
+#include<iostream>
 using namespace std;
 using std::cin;
 using std::cout;
@@ -203,11 +204,11 @@ public:
 };
 
 //#define BASE_CHECK
-//#define DESTRUCTOR_CHECK
+#define DESTRUCTOR_CHECK
 //#define HOME_WORK_1
-#define HOME_WORK_2
+//#define HOME_WORK_2
 
-void main()
+int main()
 {
 	setlocale(LC_ALL, "");
 #ifdef BASE_CHECK
@@ -283,13 +284,13 @@ void main()
 	cout << endl;
 #endif // HOME_WORK_1
 
-#ifdef HOME_WORK_2
-	ForwardList list = { 3,5,8,13,21 };
-	list.print();
-#endif // HOME_WORK_2
-
+// #ifdef HOME_WORK_2
+// 	ForwardList list = { 3,5,8,13,21 };
+// 	list.print();
+// #endif // HOME_WORK_2
+ return 0;
 }
-	//(ForwardList) = (initializer_list) это контейнер такой же как и наш forward list.
+//(ForwardList) = (initializer_list) это контейнер такой же как и наш forward list.
 //контейр - это обьект который организует хранение другит обьекто в памяти. Так же как и наш forward list, initializer list является классом,
 // и его обьекты не явно создаются всякий раз, когда мы перечисляем какие либо значения через запятую в фигурных скобках. { , , , , }
 // у любого контейнера есть методы begin и end, begin = возвращает итератор на начало контейнера, end = на конец контейнера.
