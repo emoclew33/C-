@@ -110,7 +110,7 @@ public:
 		for (int i = 0; i < index - 1; i++)Temp = Temp->pNext;
 		Temp->pNext = new Element(Data, Temp->pNext);
 
-	}
+	}fafadfafsa
 
 	//					Removing elements:
 	void pop_front()
