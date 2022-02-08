@@ -122,7 +122,7 @@ public:
 		Head = Erased->pNext;
 		//3) Удаляем элемен из памяти:
 		delete Erased;
-
+sdfsdfsf
 		size--;
 	}
 
