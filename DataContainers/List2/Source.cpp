@@ -16,15 +16,71 @@ class List
 			Data(Data), pNext(pNext), pPrev(pPrev) {}
 		~Element() {}
 		friend class List;
+		friend class Iterator;
 	}*Head, * Tail;
 	size_t size;
+	class Iterator
+	{
+		Element* Temp;
+	public:
+		Iterator(Element* Temp = nullptr) : Temp(Temp) {}
+		~Iterator() {}
+		
+		//**************	Iterator operators		****************
+
+		Iterator& operator++()
+		{
+			Temp = Temp->pNext;
+			return *this;
+		}
+		Iterator& operator++(int)
+		{
+			Iterator old = *this;
+			Temp = Temp->pNext;
+			return old;
+		}
+		Iterator& operator--()
+		{
+			Temp = Temp->pPrev;
+			return *this;
+		}
+		Iterator& operator--(int)
+		{
+			Iterator old = *this;
+			Temp = Temp->pPrev;
+			return old;
+		}
+		int& operator*()
+		{
+			return Temp->Data;
+		}
+		const int& operator*() const
+		{
+			return Temp->Data;
+		}
+		bool operator==(const Iterator& other) const
+		{
+			return this->Temp == other.Temp;
+		}
+		bool operator!=(const Iterator& other) const
+		{
+			return this->Temp != other.Temp;
+		}
+	};
 public:
 	List()
 	{
 		Head = Tail = nullptr;
 		size = 0;
 	}
-	~List() { while (Head)pop_front(); }	//- Heap error
+	List(const initializer_list<int>& il) : List()
+	{
+		for (int const* it = il.begin(); it != il.end(); it++)
+		{
+			push_back(*it);
+		}
+	}
+	~List() { while (Tail)pop_back(); }	//- Heap error
 
 	//**************	adding elements		****************
 	
@@ -60,7 +116,7 @@ public:
 		else
 		{
 			Temp = Tail;
-			for (int i = size - 1; i > index; i--) Temp = Temp->pPrev;
+			for (int i = 0; i < size - 2 - index; i++) Temp = Temp->pPrev;
 		}
 		Temp->pPrev->pNext = new Element(Data, Temp, Temp->pPrev);
 		Temp->pPrev = Temp->pPrev->pNext;
@@ -75,6 +131,7 @@ public:
 		if (Head == Tail)
 		{
 			delete Head;
+			Head = Tail = nullptr;
 			size--;
 			return;
 		}
@@ -105,12 +162,11 @@ public:
 		else
 		{
 			Temp = Tail;
-			for (int i = size - 1; i > index; i--)Temp = Temp->pPrev;
+			for (int i = 0; i < size - 2 - index; i++)Temp = Temp->pPrev;
 		}
 		Temp->pPrev->pNext = Temp->pNext;
 		Temp->pNext->pPrev = Temp->pPrev;
 		delete Temp;
-		Temp = nullptr;
 		size--;
 	}
 
@@ -128,28 +184,15 @@ public:
 			cout << Temp->pPrev << tab << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
 		}
 	}
+	Iterator begin() { return Head; }
+	Iterator end() { return nullptr; }
 };
 
 void main()
 {
 	setlocale(LC_ALL, "");
-	int n;
-
-	cout << "Введите размер списка: "; cin >> n;
-	List list;
-	for (int i = 0; i < n; i++)
-	{
-		list.push_back(rand() % 100);
-	}
-	list.print();
-	delimetr
-	list.reverse_print();
-	delimetr
-	list.insert(222222, 3);
-	list.reverse_print();
-	delimetr
-	list.erase(3);
-	list.reverse_print();
+	List list = { 3, 5, 8, 13, 21 };
+	for (int i : list)cout << i << tab; cout << endl;
 }
 
 
