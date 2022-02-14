@@ -260,7 +260,7 @@ public:
 	void unique()
 	{
 		int index = 0;
-		Element<T>* Temp = Head;
+		Element* Temp = Head;
 		for (int i = 0; i < size; i++)
 		{
 			if (Temp->Data == Temp->pNext->Data)
@@ -274,6 +274,21 @@ public:
 				Temp = Temp->pNext;
 			}
 		}
+	}
+	void reverse()
+	{
+		if (Head == nullptr)return;
+		Element* Temp = Head;
+		Element* Next = nullptr;
+		Element* Prev = nullptr;
+		while (Temp)
+		{
+			Next = Temp->pNext;
+			Temp->pNext = Prev;
+			Prev = Temp;
+			Temp = Next;
+		}
+		Head = Prev;
 	}
 
 	//						Methods:
