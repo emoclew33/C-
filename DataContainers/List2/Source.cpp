@@ -115,6 +115,10 @@ public:
 		{
 			return this->Temp != other.Temp;
 		}
+		operator bool()const
+		{
+			return Temp;
+		}
 
 
 	};
@@ -244,7 +248,7 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	List list = { 3, 5, 8, 13, 21 };
-	for (List::ReverseIterator it = list.rbegin(); it != list.rend(); ++it)
+	for (List::ReverseIterator it = list.rbegin(); it; ++it)
 	{
 		cout << *it << tab;
 	}
