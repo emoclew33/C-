@@ -17,15 +17,17 @@ class List
 		~Element() {}
 		friend class List;
 		friend class Iterator;
+		friend class ReverseIterator;
 	}*Head, * Tail;
 	size_t size;
+public:
 	class Iterator
 	{
 		Element* Temp;
 	public:
 		Iterator(Element* Temp = nullptr) : Temp(Temp) {}
 		~Iterator() {}
-		
+
 		//**************	Iterator operators		****************
 
 		Iterator& operator++()
@@ -67,7 +69,55 @@ class List
 			return this->Temp != other.Temp;
 		}
 	};
-public:
+	class ReverseIterator {
+		Element* Temp;
+	public:
+		ReverseIterator(Element* Temp = nullptr) : Temp(Temp) {}
+		~ReverseIterator() { }
+
+		//**************	ReverseIterator operators		****************
+
+		ReverseIterator& operator++()
+		{
+			Temp = Temp->pPrev;
+			return *this;
+		}
+		ReverseIterator& operator++(int)
+		{
+			ReverseIterator old = *this;
+			Temp = Temp->pPrev;
+			return old;
+		}
+		ReverseIterator& operator--()
+		{
+			Temp = Temp->pNext;
+			return *this;
+		}
+		ReverseIterator& operator--(int)
+		{
+			ReverseIterator old = *this;
+			Temp = Temp->pNext;
+			return old;
+		}
+		int& operator*()
+		{
+			return Temp->Data;
+		}
+		const int& operator*() const
+		{
+			return Temp->Data;
+		}
+		bool operator==(const ReverseIterator& other) const
+		{
+			return this->Temp == other.Temp;
+		}
+		bool operator!=(const ReverseIterator& other) const
+		{
+			return this->Temp != other.Temp;
+		}
+
+
+	};
 	List()
 	{
 		Head = Tail = nullptr;
@@ -80,7 +130,7 @@ public:
 			push_back(*it);
 		}
 	}
-	~List() { while (Tail)pop_back(); }	//- Heap error
+	~List() { while (Tail)pop_back(); }	
 
 	//**************	adding elements		****************
 	
@@ -186,13 +236,18 @@ public:
 	}
 	Iterator begin() { return Head; }
 	Iterator end() { return nullptr; }
+	ReverseIterator rbegin() { return Tail; }
+	ReverseIterator rend() { return nullptr; }
 };
 
 void main()
 {
 	setlocale(LC_ALL, "");
 	List list = { 3, 5, 8, 13, 21 };
-	for (int i : list)cout << i << tab; cout << endl;
+	for (List::ReverseIterator it = list.rbegin(); it != list.rend(); ++it)
+	{
+		cout << *it << tab;
+	}
 }
 
 
@@ -205,7 +260,8 @@ void main()
 
 
 
-// ***************************************************************************	ПЛЮСЫ
+// ************************************		ПЛЮСЫ	 ****************************************	
+// 
 //Двусвязный список это набор элементов в произвольных областях памяти которая хранит 
 // адрес не только следующего но предыдущего элемента
 // что позволяет, перемещатся по списку в обоих направлениях, как от начала до конца, 
@@ -213,10 +269,11 @@ void main()
 // Что теоретически в 2 раза уменьшает время доступа к элументам списка
 // следовательно в 2 раза повышая производительность при доступе к элементам списка.
 // 
-// ***************************************************************************	МИНУСЫ
+// ************************************		МИНУСЫ		*************************************
+// 
 // Но двусвязный список занимает больше памяти, чем односвязный
 // 
-// *************************************************************************** 
+// ******************************************************************************************
 // 
 // у двухсвязного списка есть не только голова которая дает прямой доступ к началу списка,
 //  но и хвост - который дает доступ к последнему элементу списка
@@ -224,10 +281,10 @@ void main()
 // Когда в списке появдяется первый элемент, он является единственным элементом списка 
 // и это элемент одновременно является и первым и последним элементом списка с какой стороны не посмотреть
 // 
-// ***************************************************************************
+// *****************************************************************************************
 // Голова и хвост могут содержать один и тот же адресс в 2-х случаях:
 //	-список пуст
 //	-в списке 1 элемент
 // Ткаой список еще называют	-	 ВЫРОЖДЕННЫМ
-// ***************************************************************************
+// *****************************************************************************************
 //
