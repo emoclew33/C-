@@ -16,7 +16,6 @@ class List
 			Data(Data), pNext(pNext), pPrev(pPrev) {}
 		~Element() {}
 		friend class List;
-		friend class BaseIterator;
 		friend class Iterator;
 		friend class ReverseIterator;
 	}*Head, * Tail;
@@ -43,7 +42,7 @@ public:
 		Iterator(Element* Temp = nullptr) : BaseIterator(Temp) {}
 		~Iterator() {}
 
-		//**************	BaseIterator operators		****************
+		//**************	Iterator operators		****************
 
 		Iterator& operator++()
 		{
@@ -244,9 +243,8 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	List list = { 3, 5, 8, 13, 21 };
-	for (List::Iterator it = list.cbegin(); it; ++it)
+	for (List::ConstIterator it = list.cbegin(); it; ++it)
 	{
-		*it = 1;
 		cout << *it << tab;
 	}
 }
