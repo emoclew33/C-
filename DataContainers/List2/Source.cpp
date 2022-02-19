@@ -2,7 +2,7 @@
 using namespace std;
 #define tab "\t"
 #define delimetr cout << "\n******************************\n";
-  
+
 
 class List
 {
@@ -34,9 +34,9 @@ public:
 		virtual int& operator*() { return Temp->Data; }
 		bool operator==(const BaseIterator& other) const { return this->Temp == other.Temp; }
 		bool operator!=(const BaseIterator& other) const { return this->Temp != other.Temp; }
-		operator bool()const{ return Temp; }
+		operator bool()const { return Temp; }
 	};
-	class Iterator : public BaseIterator 
+	class Iterator : public BaseIterator
 	{
 	public:
 		Iterator(Element* Temp = nullptr) : BaseIterator(Temp) {}
@@ -52,7 +52,6 @@ public:
 		Iterator& operator++(int)
 		{
 			Iterator old = *this;
-			//Temp = Temp->pNext;
 			++* this;
 			return old;
 		}
@@ -64,11 +63,11 @@ public:
 		Iterator& operator--(int)
 		{
 			Iterator old = *this;
-			Temp = Temp->pPrev;
+			--* this;
 			return old;
 		}
 	};
-	class ReverseIterator : public BaseIterator 
+	class ReverseIterator : public BaseIterator
 	{
 	public:
 		ReverseIterator(Element* Temp = nullptr) : BaseIterator(Temp) {}
@@ -95,7 +94,7 @@ public:
 		ReverseIterator& operator--(int)
 		{
 			ReverseIterator old = *this;
-			Temp = Temp->pNext;
+			--* this;
 			return old;
 		}
 	};
@@ -104,7 +103,7 @@ public:
 	public:
 		ConstIterator(Element* Temp) : Iterator(Temp) {}
 		~ConstIterator() {}
-		 const int& operator*()const { return Temp->Data; }
+		const int& operator*()const { return Temp->Data; }
 	};
 	class ConstReverseIterator : public ReverseIterator
 	{
@@ -133,10 +132,10 @@ public:
 			push_back(*it);
 		}
 	}
-	~List() { while (Tail)pop_back(); }	
+	~List() { while (Tail)pop_back(); }
 
 	//**************	adding elements		****************
-	
+
 	void push_front(int Data)
 	{
 		if (Head == nullptr && Tail == nullptr)
@@ -224,7 +223,7 @@ public:
 	}
 
 	//**************	methods		****************
-	
+
 	void print() const
 	{
 		for (Element* Temp = Head; Temp; Temp = Temp->pNext)
@@ -232,7 +231,7 @@ public:
 	}
 	void reverse_print() const
 	{
-		for (Element* Temp = Tail; Temp; Temp = Temp->pPrev) 
+		for (Element* Temp = Tail; Temp; Temp = Temp->pPrev)
 		{
 			cout << Temp->pPrev << tab << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
 		}
