@@ -53,7 +53,8 @@ public:
 		Iterator& operator++(int)
 		{
 			Iterator old = *this;
-			Temp = Temp->pNext;
+			//Temp = Temp->pNext;
+			++* this;
 			return old;
 		}
 		Iterator& operator--()
@@ -84,7 +85,7 @@ public:
 		ReverseIterator& operator++(int)
 		{
 			ReverseIterator old = *this;
-			Temp = Temp->pPrev;
+			++* this;
 			return old;
 		}
 		ReverseIterator& operator--()
@@ -243,7 +244,7 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	List list = { 3, 5, 8, 13, 21 };
-	for (List::ReverseIterator it = list.crbegin(); it; ++it)
+	for (List::Iterator it = list.cbegin(); it; ++it)
 	{
 		*it = 1;
 		cout << *it << tab;
