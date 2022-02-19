@@ -1,8 +1,7 @@
 ﻿#include <iostream>
-using namespace std;
-#define tab "\t"
-#define delimetr cout << "\n******************************\n";
 
+#define tab "\t"
+#define delimetr std::cout << "\n******************************\n";
 
 class List
 {
@@ -52,6 +51,7 @@ public:
 		Iterator& operator++(int)
 		{
 			Iterator old = *this;
+			//Temp = Temp->pNext;
 			++* this;
 			return old;
 		}
@@ -63,7 +63,7 @@ public:
 		Iterator& operator--(int)
 		{
 			Iterator old = *this;
-			--* this;
+			Temp = Temp->pPrev;
 			return old;
 		}
 	};
@@ -94,7 +94,7 @@ public:
 		ReverseIterator& operator--(int)
 		{
 			ReverseIterator old = *this;
-			--* this;
+			Temp = Temp->pNext;
 			return old;
 		}
 	};
@@ -125,7 +125,7 @@ public:
 		Head = Tail = nullptr;
 		size = 0;
 	}
-	List(const initializer_list<int>& il) : List()
+	List(const std::initializer_list<int>& il) : List()
 	{
 		for (int const* it = il.begin(); it != il.end(); it++)
 		{
@@ -227,13 +227,13 @@ public:
 	void print() const
 	{
 		for (Element* Temp = Head; Temp; Temp = Temp->pNext)
-			cout << Temp->pPrev << tab << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
+			std::cout << Temp->pPrev << tab << Temp << tab << Temp->Data << tab << Temp->pNext << std::endl;
 	}
 	void reverse_print() const
 	{
 		for (Element* Temp = Tail; Temp; Temp = Temp->pPrev)
 		{
-			cout << Temp->pPrev << tab << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
+			std::cout << Temp->pPrev << tab << Temp << tab << Temp->Data << tab << Temp->pNext << std::endl;
 		}
 	}
 };
@@ -244,7 +244,7 @@ void main()
 	List list = { 3, 5, 8, 13, 21 };
 	for (List::ConstIterator it = list.cbegin(); it; ++it)
 	{
-		cout << *it << tab;
+		std::cout << *it << tab;
 	}
 }
 
