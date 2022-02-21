@@ -19,8 +19,98 @@ class List
 		friend class ReverseIterator;
 	}*Head, * Tail;
 	size_t size;
+	class BaseIterator 
+	{
+	protected:
+		Element* Temp;
+	public:
+		BaseIterator(Element* Temp = nullptr) : Temp(Temp){}
+		~BaseIterator() {}
+		bool operator!=(const BaseIterator& other)const { return this->Temp != other.Temp; }
+		bool operator==(const BaseIterator& other)const { return this->Temp == other.Temp; }
+		const int& operator*()const { return Temp->Data; }
+		operator bool()const { return Temp; }
+	};
 public:
-	class BaseIterator
+	class ConstIterator : public BaseIterator
+	{
+	public:
+		ConstIterator(Element* Temp = nullptr) : BaseIterator(Temp) {}
+		~ConstIterator() {}
+		ConstIterator& operator++()
+		{
+			Temp = Temp->pNext;
+			return *this;
+		}
+		ConstIterator& operator++(int)
+		{
+			ConstIterator old = *this;
+			++* this;
+			return old;
+		}
+		ConstIterator& operator--()
+		{
+			Temp = Temp->pPrev;
+			return *this;
+		}
+		ConstIterator& operator--(int)
+		{
+			ConstIterator old = *this;
+			--* this;
+			return old;
+		}
+	};
+	class ConstReversIterator : public BaseIterator
+	{
+	public:
+		ConstReversIterator(Element* Temp = nullptr) : BaseIterator(Temp) {}
+		~ConstReversIterator() {}
+		ConstReversIterator& operator++()
+		{
+			Temp = Temp->pPrev;
+			return *this;
+		}
+		ConstReversIterator operator++(int)
+		{
+			ConstReversIterator old = *this;
+			++* this;
+			return old;
+		}
+		ConstReversIterator& operator--()
+		{
+			Temp = Temp->pNext;
+			return *this;
+		}
+		ConstReversIterator operator--(int)
+		{
+			ConstReversIterator old = *this;
+			--* this;
+			return old;
+		}
+	};
+	class Iterator : public ConstIterator
+	{
+	public:
+		Iterator(Element* Temp = nullptr) : ConstIterator(Temp) {}
+		~Iterator() {}
+		int& operator*() { return Temp->Data; }
+	};
+	class ReversIterator : public ConstReversIterator
+	{
+	public:
+		ReversIterator(Element* Temp) : ConstReversIterator(Temp) {}
+		~ReversIterator() {}
+		int& operator*() { return Temp->Data; }
+	};
+	Iterator		begin() { return Head; }
+	Iterator		end() { return nullptr; }
+	ReversIterator rbegin() { return Tail; }
+	ReversIterator rend() { return nullptr; }
+	const ConstIterator const cbegin() { return Head; }
+	const ConstIterator const cend() { return nullptr; }
+	const ConstReversIterator const crbegin() { return Tail; }
+	const ConstReversIterator const crend() { return nullptr; }
+	/*class BaseIterator
 	{
 	protected:
 		Element* Temp;
@@ -119,7 +209,7 @@ public:
 	const ConstIterator const cbegin() { return Head; }
 	const ConstIterator const cend() { return nullptr; }
 	const ConstReverseIterator const crbegin() { return Tail; }
-	const ConstReverseIterator const crend() { return nullptr; }
+	const ConstReverseIterator const crend() { return nullptr; }*/
 	List()
 	{
 		Head = Tail = nullptr;
