@@ -159,7 +159,7 @@ typename List<T>::ConstIterator::ConstIterator& List<T>::ConstIterator::operator
 	return *this;
 }
 template<typename T>
-typename List<T>::ConstIterator::ConstIterator& List<T>::ConstIterator::operator++(int)
+typename List<T>::ConstIterator::ConstIterator List<T>::ConstIterator::operator++(int)
 {
 	ConstIterator old = *this;
 	++* this;
@@ -172,7 +172,7 @@ typename List<T>::ConstIterator::ConstIterator& List<T>::ConstIterator::operator
 	return *this;
 }
 template<typename T>
-typename List<T>::ConstIterator::ConstIterator& List<T>::ConstIterator::operator--(int)
+typename List<T>::ConstIterator::ConstIterator List<T>::ConstIterator::operator--(int)
 {
 	ConstIterator old = *this;
 	--* this;

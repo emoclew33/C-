@@ -36,9 +36,9 @@ public:
 		ConstIterator(Element* Temp = nullptr);
 		~ConstIterator();
 		ConstIterator& operator++();
-		ConstIterator& operator++(int);
+		ConstIterator operator++(int);
 		ConstIterator& operator--();
-		ConstIterator& operator--(int);
+		ConstIterator operator--(int);
 	};
 	class ConstReversIterator : public BaseIterator
 	{
