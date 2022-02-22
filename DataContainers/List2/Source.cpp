@@ -2,7 +2,7 @@
 #include "List2.h"
 #include "List2.cpp"
 
-void main()x
+void main()
 {
 	setlocale(LC_ALL, "");
 	
