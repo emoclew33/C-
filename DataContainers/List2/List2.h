@@ -36,8 +36,8 @@ public:
 		ConstIterator(Element* Temp = nullptr);
 		~ConstIterator();
 		ConstIterator& operator++();
-		ConstIterator operator++(int);
 		ConstIterator& operator--();
+		ConstIterator operator++(int);
 		ConstIterator operator--(int);
 	};
 	class ConstReversIterator : public BaseIterator
@@ -46,8 +46,8 @@ public:
 		ConstReversIterator(Element* Temp = nullptr);
 		~ConstReversIterator();
 		ConstReversIterator& operator++();
-		ConstReversIterator operator++(int);
 		ConstReversIterator& operator--();
+		ConstReversIterator operator++(int);
 		ConstReversIterator operator--(int);
 	};
 	class Iterator : public ConstIterator
@@ -77,20 +77,12 @@ public:
 	List(const std::initializer_list<T>& il);
 	~List();
 
-	//**************	adding elements		****************
-
 	void push_front(T Data);
 	void push_back(T Data);
 	void insert(T Data, size_t index);
-
-	//**************	remove elements		****************
-
 	void pop_front();
 	void pop_back();
 	void erase(size_t index);
-
-	//**************	methods		****************
-
 	void print() const;
 	void reverse_print() const;
 };
