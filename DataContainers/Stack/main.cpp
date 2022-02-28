@@ -2,18 +2,18 @@
 #include "Element.h"
 #include "Element.cpp"
 
-
+template<typename T>
 class Stack
 {
-    Element* Head;
+    Element<T>* Head;
     size_t size;
     void pop_front();
 public:
     Stack();
     ~Stack();
-    void push(int Data);
+    void push(T Data);
     void pop();
-    int top();
+    T top();
     bool empty();
 };
 
@@ -22,7 +22,7 @@ public:
 int main() {
   
   setlocale(LC_ALL,"rus");
-  Stack steсk; 
+  Stack<int> steсk; 
  
   std::cout << "Enter size stack: " << std::endl; 
   int size; std::cin >> size;
@@ -48,10 +48,10 @@ Stack::Stack()
     Head = nullptr;
     size = 0;
 }
-void Stack::pop_front()
+template<typename T>void Stack<T>::pop_front()
 {
     if (Head == nullptr)return;
-	Element* Erased = Head;
+	Element<T>* Erased = Head;
 	Head = Erased->pNext;
 	delete Erased;
 	size--;
@@ -59,41 +59,41 @@ void Stack::pop_front()
 
 Stack::~Stack(){ while (Head)pop_front(); }
 
-void Stack::push(int Data)
+template<typename T>void Stack<T>::push(T Data)
 {
     if(Head == nullptr)
     {
-        Head = new Element(Data, Head);
+        Head = new Element<T>(Data, Head);
 	    size++;
     }
     else
     {
-        Element* Temp = Head;
+        Element<t>* Temp = Head;
         while(Temp->pNext)Temp = Temp->pNext;
-        Temp->pNext = new Element(Data);
+        Temp->pNext = new Element<T>(Data);
         size++;
     }
 }
 
-void Stack::pop()
+template<typename T>void Stack<T>::pop()
 {
     if (Head == nullptr)return;
 	if (Head->pNext == nullptr)return pop_front();
-	Element* Temp = Head;
+	Element<T>* Temp = Head;
 	while (Temp->pNext->pNext)Temp = Temp->pNext;
 	delete Temp->pNext;
 	Temp->pNext = nullptr;
 	size--;
 }
 
-int Stack::top()
+template<typename T>T Stack<T>::top()
 {
     if (Head == nullptr)return 0;
-    Element* Temp = Head;
+    Element<T>* Temp = Head;
     while(Temp->pNext)Temp = Temp->pNext;
     return Temp->Data;
 }
-bool Stack::empty()
+template<typename T>bool Stack<T>::empty()
 {
     if (Head == nullptr)return false;
     return true;
