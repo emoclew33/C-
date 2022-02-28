@@ -43,7 +43,7 @@ int main() {
 }
 
 
-Stack::Stack()
+template<typename T>Stack<T>::Stack()
 {
     Head = nullptr;
     size = 0;
@@ -57,7 +57,7 @@ template<typename T>void Stack<T>::pop_front()
 	size--;
 }
 
-Stack::~Stack(){ while (Head)pop_front(); }
+template<typename T>Stack<T>::~Stack(){ while (Head)pop_front(); }
 
 template<typename T>void Stack<T>::push(T Data)
 {
