@@ -1,11 +1,11 @@
 #include "Element.h"
 
-template<typename T>Element<T>::Element(T Data, Element<T>* pNext) :Data(Data), pNext(pNext)
+Element::Element(int Data, Element* pNext) :Data(Data), pNext(pNext)
 {
 	count++;
 }
-template<typename T>Element<T>::~Element()
+Element::~Element()
 {
 	count--;
 }
-template<typename T>int Element<T>::count = 0;
+int Element::count = 0;

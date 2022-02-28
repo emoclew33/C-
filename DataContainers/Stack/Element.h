@@ -2,13 +2,13 @@
 #include "stdfix.h"
 
 
-template<typename T>class Element
+class Element
 {
-	T Data;	//Значение элемента
-	Element<T>* pNext;//указатель на шаблонный элемент
+	int Data;	//Значение элемента
+	Element* pNext;//указатель на шаблонный элемент
 	static int count;
 public:
-	Element(T Data, Element<T>* pNext = nullptr);
+	Element(int Data, Element* pNext = nullptr);
 	~Element();
     friend class Stack;
 };

@@ -2,18 +2,18 @@
 #include "Element.h"
 #include "Element.cpp"
 
-template<typename T>
+
 class Stack
 {
-    Element<T>* Head;
+    Element* Head;
     size_t size;
     void pop_front();
 public:
     Stack();
     ~Stack();
-    void push(T Data);
+    void push(int Data);
     void pop();
-    T top();
+    int top();
     bool empty();
 };
 
@@ -21,8 +21,8 @@ public:
 
 int main() {
   
-  setlocale(LC_ALL,"rus");
-  Stack<int> steсk; 
+ 
+  Stack steсk; 
  
   std::cout << "Enter size stack: " << std::endl; 
   int size; std::cin >> size;
@@ -48,10 +48,10 @@ Stack::Stack()
     Head = nullptr;
     size = 0;
 }
-template<typename T>void Stack<T>::pop_front()
+void Stack::pop_front()
 {
     if (Head == nullptr)return;
-	Element<T>* Erased = Head;
+	Element* Erased = Head;
 	Head = Erased->pNext;
 	delete Erased;
 	size--;
@@ -59,41 +59,41 @@ template<typename T>void Stack<T>::pop_front()
 
 Stack::~Stack(){ while (Head)pop_front(); }
 
-template<typename T>void Stack<T>::push(T Data)
+void Stack::push(int Data)
 {
     if(Head == nullptr)
     {
-        Head = new Element<T>(Data, Head);
+        Head = new Element(Data, Head);
 	    size++;
     }
     else
     {
-        Element<t>* Temp = Head;
+        Element* Temp = Head;
         while(Temp->pNext)Temp = Temp->pNext;
-        Temp->pNext = new Element<T>(Data);
+        Temp->pNext = new Element(Data);
         size++;
     }
 }
 
-template<typename T>void Stack<T>::pop()
+void Stack::pop()
 {
     if (Head == nullptr)return;
 	if (Head->pNext == nullptr)return pop_front();
-	Element<T>* Temp = Head;
+	Element* Temp = Head;
 	while (Temp->pNext->pNext)Temp = Temp->pNext;
 	delete Temp->pNext;
 	Temp->pNext = nullptr;
 	size--;
 }
 
-template<typename T>T Stack<T>::top()
+int Stack::top()
 {
     if (Head == nullptr)return 0;
-    Element<T>* Temp = Head;
+    Element* Temp = Head;
     while(Temp->pNext)Temp = Temp->pNext;
     return Temp->Data;
 }
-template<typename T>bool Stack<T>::empty()
+bool Stack::empty()
 {
     if (Head == nullptr)return false;
     return true;
