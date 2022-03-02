@@ -2,6 +2,7 @@
 
 class Tree
 {
+protected:
 	class Element
 	{
 		int Data;
@@ -12,11 +13,14 @@ class Tree
 		{
 			std::cout << "ElementC:\t" << this << std::endl;
 		}
+		
 		~Element()
 		{
+		
 			std::cout << "ElementD:\t" << this << std::endl;
 		}
 		friend class Tree;
+		friend class UniqueTree;
 	}*Root;
 public:
 	Element* get_root()const
@@ -28,11 +32,43 @@ public:
 		this->Root = nullptr;
 		std::cout << "TreeC:\t" << this << std::endl;
 	}
+	Tree(const std::initializer_list<int>& il) : Tree()
+	{
+		for (int const* it = il.begin(); it != il.end(); it++)
+		{
+			insert(*it, Root);
+		}
+	}
+	Tree(const Tree& other) : Tree()
+	{
+		copy(other.Root);
+		std::cout << "CopyConstr:\t " << this << std::endl;
+	}
 	~Tree()
 	{
+		clear(Root);
 		std::cout << "TreeD:\t" << this << std::endl;
 	}
-
+	void insert(int Data) { return insert(Data, Root); }
+	void print()const { print(Root); std::cout << std::endl; }
+	void copy(Element* Root)
+	{
+		if (Root == nullptr)return;
+		insert(Root->Data, this->Root);
+		copy(Root->pLeft);
+		copy(Root->pRight);
+	}
+	int minValue()const { return minValue(Root); }
+	int maxValue()const { return maxValue(Root); }
+	int size()const { return size(Root); }
+	int sum()const { return sum(Root); }
+	double avg()const { return (double)sum(Root) / size(Root); }
+	void clear()
+	{ 
+		clear(Root); 
+		Root = nullptr;
+	}
+private:
 	void insert(int Data, Element* Root)
 	{
 		if (this->Root == nullptr)
@@ -59,20 +95,81 @@ public:
 		std:: cout << Root->Data << "\t";
 		print(Root->pRight);
 	}
+	int minValue(Element* Root)const
+	{
+		return Root->pLeft == nullptr ? Root->Data : minValue(Root->pLeft);
+	}
+	int maxValue(Element* Root)const
+	{
+		if (Root == nullptr)return 0;
+		return Root->pRight ? maxValue(Root->pRight) : Root->Data;
+	}
+	int size(Element* Root)const
+	{
+		return Root == nullptr ? 0 : size(Root->pLeft) + size(Root->pRight) + 1;
+	}
+	int sum(Element* Root)const
+	{
+		return !Root ? 0 : sum(Root->pLeft) + sum(Root->pRight) + Root->Data;
+	}
+	void clear(Element* Root)
+	{
+		if (Root == nullptr)return;
+		clear(Root->pLeft);
+		clear(Root->pRight);
+		delete Root;
+	}
 };
 
+class UniqueTree : public Tree
+{
+	void insert(int Data, Element* Root)
+	{
+		if (this->Root == nullptr)
+		{
+			this->Root = new Element(Data);
+			return;
+		}
+		if (Root == nullptr)return;
+		if (Data < Root->Data)
+		{
+			if (Root->pLeft == nullptr)Root->pLeft = new Element(Data);
+			else insert(Data, Root->pLeft);
+		}
+		else if(Data > Root->Data)
+		{
+			if (Root->pRight == nullptr)Root->pRight = new Element(Data);
+			else insert(Data, Root->pRight);
+		}
+	}
+public:
+	void insert(int Data)
+	{
+		insert(Data, Root);
+	}
+};
+
+//#define BASE_CHECK
 int main()
 {
 	setlocale(LC_ALL, "");
-	int n;
-	std::cout << "¬ведите размер дерева: "; std::cin >> n;
-	Tree tree;
-	for (int i = 0; i < n; i++)
-	{
-		tree.insert(rand() % 100, tree.get_root());
-	}
-	tree.print(tree.get_root());
-	std::cout << std::endl;
+#ifdef BASE_CHECK
+	/*int n;
+std::cout << "¬ведите размер дерева: "; std::cin >> n;
+Tree tree;
+for (int i = 0; i < n; i++)
+{
+	tree.insert(rand() % 100);
+}
+tree.print();
+std::cout << std::endl;
+std::cout << tree.size() << std::endl;*/
+#endif // BASE_CHECK
+
+	Tree tree = { 50, 25, 75, 16, 32, 64, 80 };
+	tree.print();
+	Tree tree2 = tree;
+	tree2.print();
 }
 
 
