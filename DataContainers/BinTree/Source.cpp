@@ -19,6 +19,7 @@ protected:
 		
 			std::cout << "ElementD:\t" << this << std::endl;
 		}
+		bool is_leaf()const { return pLeft == pRight; }
 		friend class Tree;
 		friend class UniqueTree;
 	}*Root;
@@ -68,6 +69,7 @@ public:
 		clear(Root); 
 		Root = nullptr;
 	}
+	void erase(int Data) { erase(Data, Root); }
 private:
 	void insert(int Data, Element* Root)
 	{
@@ -119,6 +121,33 @@ private:
 		clear(Root->pRight);
 		delete Root;
 	}
+	void erase(int Data, Element*& Root)
+	{
+		if (Root == nullptr)return;
+		erase(Data, Root->pLeft);
+		erase(Data, Root->pRight);
+		if (Data == Root->Data)
+		{
+			if (Root->is_leaf())
+			{
+				delete Root;
+				Root = nullptr;
+			}
+			else
+			{
+				if (size(Root->pLeft) > size(Root->pRight))
+				{
+					Root->Data = maxValue(Root->pLeft);
+					erase(maxValue(Root->pLeft), Root->pLeft);
+				}
+				else
+				{
+					Root->Data = minValue(Root->pRight);
+					erase(minValue(Root->pRight), Root->pRight);
+				}
+			}
+		}
+	}
 };
 
 class UniqueTree : public Tree
@@ -168,8 +197,10 @@ std::cout << tree.size() << std::endl;*/
 
 	Tree tree = { 50, 25, 75, 16, 32, 64, 80 };
 	tree.print();
-	Tree tree2 = tree;
-	tree2.print();
+	int value; 
+	std::cout << "Enter remove element: "; std::cin >> value;
+	tree.erase(value);
+	tree.print();
 }
 
 
@@ -196,6 +227,8 @@ std::cout << tree.size() << std::endl;*/
 /*
 *	Если у какого то элемента нет леврнр или правого потомка то кго соответствующий указатель будет указывать на ноль
 
-
-
+		Удаление жэлементов из дерева.
+	1. У удаляемого элемента нет потомков.
+	2. У удаляемого элемента есть потомки.
+	Элемент не имеющий потомков называют "Листком" 
 */
