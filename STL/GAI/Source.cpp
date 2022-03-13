@@ -6,8 +6,6 @@
 #include <Windows.h>
 
 #define _GAI_TYPE_ <const std::string, std::list<std::string>>
-#define _ADD_VIOLATION_			std::string tag; std::cout << "Добавить  нарушение:" << std::endl; std::getline(std::cin, tag);temp.second.push_back(tag);gai.insert(temp);
-
 void add_protocol(std::map _GAI_TYPE_& base) {
 	std::cout << "Добавить протокол:" << std::endl;
 	std::cout << "------------------" << std::endl;
@@ -80,6 +78,7 @@ void main() {
 		menu();
 		key = _getch();
 		switch (key)
+
 		{
 		case'1':add_protocol(gai); break;
 		case '2':print(gai); break;
