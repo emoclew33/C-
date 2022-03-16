@@ -17,6 +17,6 @@ std::ostream& operator<<(std::ostream& os, const Crime& obj)
 }
 std::ofstream& operator<<(std::ofstream& os, const Crime& obj)
 {
-	os << obj.get_id() << ", " << obj.get_place();
+	os << obj.get_id() << " " << obj.get_place();
 	return os;
 }
