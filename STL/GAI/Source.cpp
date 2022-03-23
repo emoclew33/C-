@@ -9,9 +9,13 @@
 
 #include"Crime.h"
 
+#define del "\n------------------------------------------------------------------\n"
+
 
 void add(std::map<std::string, std::list<Crime>>& base);
 void print(const std::map<std::string, std::list<Crime>>& base);
+void print(const std::map<std::string, std::list<Crime>>& base, const std::string& licence_plate);
+void print(const std::map<std::string, std::list<Crime>>& base, const std::string& first_plate, const std::string& last_plate);
 void save(const std::map<std::string, std::list<Crime>>& base, const std::string& filename);
 void load(std::map<std::string, std::list<Crime>>& base, const std::string& filename);
 
@@ -27,10 +31,20 @@ void main()
 		{"a001a", {Crime(4, "перекресток Ленина и Октябрьской"), Crime(3, "ул. Октябрьская")}}
 	}*/;
 	load(base, "base.txt");
+	load(base, "base.txt");
+	load(base, "base.txt");
 	//print(base);
 	//save(base, "base.txt");
 	//add(base);
 	print(base);
+	/*std::string licence_plate;
+	std::cout << "Введите номер ТС:"; std::cin >> licence_plate;
+	print(base, licence_plate);*/
+	std::string first, last;
+	std::cout << "ВВедите начальный номерной знак: "; std::cin >> first;
+	std::cout << "ВВедите конечный номерной знак: "; std::cin >> last;
+	print(base, first, last);
+	
 }
 
 void add(std::map<std::string, std::list<Crime>>& base)
@@ -65,7 +79,47 @@ void print(const std::map<std::string, std::list<Crime>>& base)
 		{
 			std::cout << "\t" << *jt << ";\n";
 		}
-		std::cout << "\n-----------------------------------------------\n";
+		std::cout << del;
+	}
+}
+void print(const std::map<std::string, std::list<Crime>>& base, const std::string& first_plate, const std::string& last_plate)
+{
+	try
+	{
+		for (
+			std::map<std::string, std::list<Crime>>::const_iterator it = base.lower_bound(first_plate);
+			it != base.upper_bound(last_plate);
+			++it
+			)
+		{
+			std::cout << it->first << ":\n";
+			for (std::list<Crime>::const_iterator jt = it->second.begin(); jt != it->second.end(); ++jt)
+			{
+				std::cout << *jt << std::endl;
+			}
+			std::cout << del;
+		}
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+void print(const std::map<std::string, std::list<Crime>>& base, const std::string& licence_plate)
+{
+	try
+	{
+		std::cout << licence_plate << ":\n";
+		for (
+			std::list<Crime>::const_iterator it = base.at(licence_plate).begin();
+			it != base.at(licence_plate).end();
+			++it
+			)
+			std::cout << *it << std::endl;
+	}
+	catch (...)
+	{
+		std::cerr << "В базе нет такого номера" << std::endl;
 	}
 }
 void save(const std::map<std::string, std::list<Crime>>& base, const std::string& filename)
@@ -111,8 +165,8 @@ void load(std::map<std::string, std::list<Crime>>& base, const std::string& file
 				id = std::atoi(pch);//берем номер правонарушения, преобразуем его в целочисленный формат.
 				pch = std::strchr(pch, ' ') + 1;//для того чтобы убрать id из строки, находим пробел в строке и смещаем начао строки на сивол, следующий за пробелом.
 				if (
-					std::find(base.at(licence_plate).begin(), base.at(licence_plate).end(), Crime(id, pch)) 
-					== base.at(licence_plate).end()
+					std::find(base[licence_plate].begin(), base[licence_plate].end(), Crime(id, pch)) 
+					== base[licence_plate].end()
 					)
 					base[licence_plate].push_back(Crime(id, pch));
 			}
