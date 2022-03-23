@@ -107,7 +107,13 @@ public:
 	}
 	void control_car()
 	{
-		std::cout << "press enter to get in" << std::endl;
+
+		std::cout << "\t[ ”парвление машиной ]\n" <<
+			" Enter - сесть/выйти из машины\n" <<
+			" F - заправить\n" <<
+			" S - заупустить/выключить двигатель\n" <<
+			" P - посмотреть на панель\n" <<
+			" Escape - завершение программы\n";
 		char key;
 		do
 		{
@@ -122,12 +128,12 @@ public:
 			case 'F':
 			case 'f':
 				double fuel;
-				std::cout << "enter amount of fuel:"; std::cin >> fuel;
+				std::cout << "Ќа сколько литров заправить: "; std::cin >> fuel;
 				tank.fill(fuel);
 				break;
-			case 'I':
-			case 'i':
-				this->info();
+			case 'P':
+			case 'p':
+				this->panel();
 				break;
 			case 'S':
 			case 's':
@@ -140,7 +146,7 @@ public:
 	}
 	void panel()const
 	{
-		system("CLS");
+		//system("CLS");
 		std::cout << "Fuel level: " << tank.get_fuel_level() << " liters\n" <<
 			"Engine is " << (engine.started() ? "started" : "stop") << std::endl;
 	}
