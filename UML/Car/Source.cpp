@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <conio.h>
 #define Escape 27
 #define Enter 13
@@ -41,9 +41,9 @@ public:
 };
 class Engine
 {
-	double consumption; // расход на 100 км
-	double consumption_per_second; //расход за одну секунду
-	bool is_started; //двигатель заведен или заглушен
+	double consumption; // СЂР°СЃС…РѕРґ РЅР° 100 РєРј
+	double consumption_per_second; //СЂР°СЃС…РѕРґ Р·Р° РѕРґРЅСѓ СЃРµРєСѓРЅРґСѓ
+	bool is_started; //РґРІРёРіР°С‚РµР»СЊ Р·Р°РІРµРґРµРЅ РёР»Рё Р·Р°РіР»СѓС€РµРЅ
 public:
 	double get_consumption()const { return consumption; }
 	double get_consumption_per_second()const { return consumption_per_second; }
@@ -108,12 +108,11 @@ public:
 	void control_car()
 	{
 
-		std::cout << "\t[ Упарвление машиной ]\n" <<
-			" Enter - сесть/выйти из машины\n" <<
-			" F - заправить\n" <<
-			" S - заупустить/выключить двигатель\n" <<
-			" P - посмотреть на панель\n" <<
-			" Escape - завершение программы\n";
+		std::cout << "\n Enter - СЃРµСЃС‚СЊ/РІС‹Р№С‚Рё РёР· РјР°С€РёРЅС‹\n" <<
+			" F - Р·Р°РїСЂР°РІРёС‚СЊ\n" <<
+			" S - Р·Р°РїСѓСЃС‚РёС‚СЊ/РІС‹РєР»СЋС‡РёС‚СЊ РґРІРёРіР°С‚РµР»СЊ\n" <<
+			" P - РїРѕСЃРјРѕС‚СЂРµС‚СЊ РЅР° РїР°РЅРµР»СЊ\n" <<
+			" Escape - Р·Р°РІРµСЂС€РµРЅРёРµ РїСЂРѕРіСЂР°РјРјС‹\n";
 		char key;
 		do
 		{
@@ -124,11 +123,11 @@ public:
 			case Enter:
 				if (driver_inside)get_out();
 				else get_in();
-				break; //вход и выход из машины
+				break; //РІС…РѕРґ Рё РІС‹С…РѕРґ РёР· РјР°С€РёРЅС‹
 			case 'F':
 			case 'f':
 				double fuel;
-				std::cout << "На сколько литров заправить: "; std::cin >> fuel;
+				std::cout << "РќР° СЃРєРѕР»СЊРєРѕ Р»РёС‚СЂРѕРІ Р·Р°РїСЂР°РІРёС‚СЊ: "; std::cin >> fuel;
 				tank.fill(fuel);
 				break;
 			case 'P':
@@ -162,7 +161,7 @@ void main()
 	tank.info();
 	while (true)
 	{
-		std::cout << "Введите обьем топлива: "; std::cin >> fuel;
+		std::cout << "Р’РІРµРґРёС‚Рµ РѕР±СЊРµРј С‚РѕРїР»РёРІР°: "; std::cin >> fuel;
 		tank.fill(fuel);
 		tank.info();
 	}
