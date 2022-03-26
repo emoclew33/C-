@@ -204,6 +204,9 @@ public:
 			case 'w':case 'W':
 				gas();
 				break;
+			case 's':case 'S':
+				brake();
+				break;
 			default:
 				break;
 			}
@@ -243,8 +246,15 @@ public:
 			speed += _STEP_SPEED_;
 			//control.free_wheeling_thread = std::thread(&Car::free_wheeling, this);
 		}
-		std::this_thread::sleep_for(3s);
-
+		std::this_thread::sleep_for(2s);
+	}
+	void brake()
+	{
+		if (engine.started() && speed > 0)
+		{
+			speed -= _STEP_SPEED_;
+		}
+		std::this_thread::sleep_for(1s);
 	}
 };
 
