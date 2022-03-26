@@ -228,13 +228,23 @@ public:
 			std::this_thread::sleep_for(1s);
 		}
 	}
+	void free_wheeling()
+	{
+		while (speed > 0)
+		{
+			speed < 0 ? speed = 0 : speed--;
+			std::this_thread::sleep_for(3s);
+		}
+	}
 	void gas()
 	{
 		if(engine.started() && speed < _MAX_SPEED_)
 		{
 			speed += _STEP_SPEED_;
-			std::this_thread::sleep_for(3s);
+			//control.free_wheeling_thread = std::thread(&Car::free_wheeling, this);
 		}
+		std::this_thread::sleep_for(3s);
+
 	}
 };
 
