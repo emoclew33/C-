@@ -4,9 +4,6 @@
 
 using namespace std::chrono_literals;
 
-
-
-#define del std::cout << "\n--------------------------------------------------------------------\n";
 //#define TANK_CHECK
 //#define ENGINE_CHECK
 #define CAR_CHECK
@@ -127,7 +124,7 @@ public:
 	void get_out()
 	{
 		driver_inside = false;
-		if(control.panel_thread.joinable())control.panel_thread.join();
+		if (control.panel_thread.joinable())control.panel_thread.join();
 		system("CLS");
 		std::cout << "you are out of your car" << std::endl;
 	}
@@ -164,7 +161,7 @@ public:
 		char key;
 		do
 		{
-				key = _getch();
+			key = _getch();
 			switch (key)
 			{
 			case Enter:
@@ -185,15 +182,7 @@ public:
 					std::cout << "Заправка завершена" << std::endl;
 				}
 				break;
-			/*case 'P':
-			case 'p':
-				this->panel();
-				break;
-			case 'S':
-			case 's':
-				engine.started() ? engine.stop() : engine.start();
-				break;*/
-			case Escape: 
+			case Escape:
 				stop_engine();
 				get_out();
 				break;
@@ -241,7 +230,7 @@ public:
 	}
 	void gas()
 	{
-		if(engine.started() && speed < _MAX_SPEED_)
+		if (engine.started() && speed < _MAX_SPEED_)
 		{
 			speed += _STEP_SPEED_;
 			//control.free_wheeling_thread = std::thread(&Car::free_wheeling, this);
