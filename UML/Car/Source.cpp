@@ -60,6 +60,7 @@ public:
 
 #define _MIN_ENGIN_CONSUMPTION_ 3
 #define _MAX_ENGIN_CONSUMPTION_ 25
+#define _DEFAULT_ENGIN_CONSUPTION_ 10
 
 class Engine
 {
@@ -74,12 +75,21 @@ public:
 		if (consumption >= _MIN_ENGIN_CONSUMPTION_ && consumption <= _MAX_ENGIN_CONSUMPTION_)
 			this->consumption = consumption;
 		else
-			this->consumption = 10;
+			this->consumption = _DEFAULT_ENGIN_CONSUPTION_;
 		this->consumption_per_second = this->consumption * 3e-5;
 	}
 	void start() { is_started = true; }
 	void stop() { is_started = false; }
 	bool started()const { return is_started; }
+	void correct_consumption(int speed)
+	{
+		if (speed >= 1 && speed <= 60 || speed >= 101 && speed <= 140)
+			consumption_per_second = 0.002;
+		if (speed >= 61 && speed <= 100)consumption_per_second = .0014;
+		if (speed >= 141 && speed <= 200)consumption_per_second = .0025;
+		if (speed >= 201 && speed <= 250)consumption_per_second = .003;
+		if (speed == 0) consumption_per_second = .0003;
+	}
 	void info()const
 	{
 		std::cout << "Consumption per 100 km: " << consumption << " liters\n" <<
@@ -205,8 +215,24 @@ public:
 				if (engine.started())stop_engine();
 				else start_engine();
 				break;
-			case 'w':case 'W': accellerate(); break;
-			case 's':case 'S': slow_down();   break;
+			case 'w':case 'W': 
+				if (driver_inside && engine.started())
+				{
+					if (speed < MAX_SPEED)speed += accelleration;
+					if (speed > MAX_SPEED)speed = MAX_SPEED;
+					if (!control.free_wheeling_thread.joinable())
+						control.free_wheeling_thread = std::thread(&Car::free_wheeling, this);
+					std::this_thread::sleep_for(1s);
+				}
+				break;
+			case 's':case 'S':
+				if (driver_inside && speed > 0)
+				{
+					speed -= accelleration;
+					if (speed < 0)speed = 0;
+					std::this_thread::sleep_for(1s);
+				}   
+				break;
 			default:
 				break;
 			}
@@ -236,6 +262,7 @@ public:
 				color_text("stop", Color::RED);
 			}
 			std::cout << std::endl;
+			std::cout << "consumption per second :" << engine.get_consumption_per_second() << " l/s\n";
 			std::this_thread::sleep_for(1s);
 		}
 	}
@@ -252,6 +279,7 @@ public:
 		{
 			speed < 0 ? speed = 0 : speed--;
 			std::this_thread::sleep_for(1s);
+			engine.correct_consumption(speed);
 		}
 	}
 	void accellerate()
