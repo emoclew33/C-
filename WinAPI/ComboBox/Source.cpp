@@ -9,7 +9,7 @@ CONST CHAR* string[] =
 	"English", "Russian", "French"
 };
 
-CHAR sz_language[] = "Выбирите язык";
+CHAR sz_language[] = "Выберете язык";
 
 BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
