@@ -1,44 +1,44 @@
-#include <Windows.h>
+п»ї#include <Windows.h>
 
 CONST CHAR g_szClassName[] = "My Window Class"; // global string zero
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT nCmdShow)
 {
-	//ИНИЦИАЛИЗАЦИЯ
+	//РРќРР¦РРђР›РР—РђР¦РРЇ
 	WNDCLASSEX wc;														// window class
-	ZeroMemory(&wc, sizeof(WNDCLASSEX));								// зануляем экземпляр wc
-	wc.cbSize = sizeof(WNDCLASSEX);										// инициализируем поля структуры данных
+	ZeroMemory(&wc, sizeof(WNDCLASSEX));								// Р·Р°РЅСѓР»СЏРµРј СЌРєР·РµРјРїР»СЏСЂ wc
+	wc.cbSize = sizeof(WNDCLASSEX);										// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РїРѕР»СЏ СЃС‚СЂСѓРєС‚СѓСЂС‹ РґР°РЅРЅС‹С…
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
-	wc.lpfnWndProc = WndProc;											// задаем процедуру окна для данного класса
+	wc.lpfnWndProc = WndProc;											// Р·Р°РґР°РµРј РїСЂРѕС†РµРґСѓСЂСѓ РѕРєРЅР° РґР»СЏ РґР°РЅРЅРѕРіРѕ РєР»Р°СЃСЃР°
 	
-	wc.style = 0;														// стиль окна, определяет его дополнительные свойства.
-	wc.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION));	// иконка, на панели задач
-	wc.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION)); // иконка, в строке заголовка (IconSm - icon small)
+	wc.style = 0;														// СЃС‚РёР»СЊ РѕРєРЅР°, РѕРїСЂРµРґРµР»СЏРµС‚ РµРіРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЃРІРѕР№СЃС‚РІР°.
+	wc.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION));	// РёРєРѕРЅРєР°, РЅР° РїР°РЅРµР»Рё Р·Р°РґР°С‡
+	wc.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION)); // РёРєРѕРЅРєР°, РІ СЃС‚СЂРѕРєРµ Р·Р°РіРѕР»РѕРІРєР° (IconSm - icon small)
 	wc.hCursor = LoadCursor(hInstance, MAKEINTRESOURCE(IDC_ARROW));
 	wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
 	wc.hInstance = hInstance;
-	wc.lpszMenuName = NULL;												// ID меню окна, если окно главное или ID ресурса, если окно дочернее. NULL - меню отсутствует
+	wc.lpszMenuName = NULL;												// ID РјРµРЅСЋ РѕРєРЅР°, РµСЃР»Рё РѕРєРЅРѕ РіР»Р°РІРЅРѕРµ РёР»Рё ID СЂРµСЃСѓСЂСЃР°, РµСЃР»Рё РѕРєРЅРѕ РґРѕС‡РµСЂРЅРµРµ. NULL - РјРµРЅСЋ РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚
 	wc.lpszClassName = g_szClassName;
 
-	//РЕГИСТРАЦИЯ
+	//Р Р•Р“РРЎРўР РђР¦РРЇ
 	if (!RegisterClassEx(&wc))
 	{
 		MessageBox(NULL, "Class registration failed", "Error", MB_OK | MB_ICONERROR);
 		return 0;
 	}
-	//СОЗДАНИЕ ОКНА
+	//РЎРћР—Р”РђРќРР• РћРљРќРђ
 	HWND hwnd = CreateWindowEx
 		(
 			NULL,						  // Ex - style
-			g_szClassName,				  // имя класса окна
-			"Main Window",				  // заголовок окна
-			WS_OVERLAPPEDWINDOW,		  // стиль окна. У главного окна приложения стиль всегда WS_OVERLAPPEDWINDOW
-			20, 40, // положение окна
-			640, 480, // размер окна
-			NULL,						  // родительское окно
-			NULL,						  // окна
+			g_szClassName,				  // РёРјСЏ РєР»Р°СЃСЃР° РѕРєРЅР°
+			"Main Window",				  // Р·Р°РіРѕР»РѕРІРѕРє РѕРєРЅР°
+			WS_OVERLAPPEDWINDOW,		  // СЃС‚РёР»СЊ РѕРєРЅР°. РЈ РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР° РїСЂРёР»РѕР¶РµРЅРёСЏ СЃС‚РёР»СЊ РІСЃРµРіРґР° WS_OVERLAPPEDWINDOW
+			20, 40, // РїРѕР»РѕР¶РµРЅРёРµ РѕРєРЅР°
+			640, 480, // СЂР°Р·РјРµСЂ РѕРєРЅР°
+			NULL,						  // СЂРѕРґРёС‚РµР»СЊСЃРєРѕРµ РѕРєРЅРѕ
+			NULL,						  // РѕРєРЅР°
 			hInstance,
 			NULL						  // 
 		);
@@ -47,10 +47,10 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		MessageBox(NULL, "Window creation failed", "Info", MB_OK | MB_ICONERROR);
 		return 0;
 	}
-	ShowWindow(hwnd, nCmdShow);		// задаем режим отображения
-	UpdateWindow(hwnd);				// прорисовка окна
+	ShowWindow(hwnd, nCmdShow);		// Р·Р°РґР°РµРј СЂРµР¶РёРј РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
+	UpdateWindow(hwnd);				// РїСЂРѕСЂРёСЃРѕРІРєР° РѕРєРЅР°
 
-	//ЗАПУСК ЦИКЛА СООБЩЕНИЙ
+	//Р—РђРџРЈРЎРљ Р¦РРљР›Рђ РЎРћРћР‘Р©Р•РќРР™
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0) > 0)
 	{
@@ -68,7 +68,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_CREATE:break;
 	case WM_COMMAND:break;
 	case WM_CLOSE:
-		if (MessageBox(hwnd, "Вы действительно хотите закрыть окно?", "Шо, внатуре?", MB_YESNO | MB_ICONQUESTION) == IDYES)
+		if (MessageBox(hwnd, "Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ Р·Р°РєСЂС‹С‚СЊ РѕРєРЅРѕ?", "РЁРѕ, РІРЅР°С‚СѓСЂРµ?", MB_YESNO | MB_ICONQUESTION) == IDYES)
 		{
 			DestroyWindow(hwnd);
 		}
