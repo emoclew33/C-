@@ -50,19 +50,14 @@ END
 // Dialog
 //
 
-IDD_DIALOG1 DIALOGEX 0, 0, 330, 155
+IDD_DIALOG1 DIALOGEX 0, 0, 237, 129
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Окно диалога"
+CAPTION "ComboBox"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "ОК",IDOK,165,105,65,17
-    PUSHBUTTON      "Отмена",IDCANCEL,236,105,74,17
-    LTEXT           "Login",IDC_STATIC_LOGIN,45,28,18,8
-    LTEXT           "Password",IDC_STATIC_PASSWORD,45,66,31,8
-    EDITTEXT        IDC_EDIT_PASSWORD,39,79,253,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_LOGIN,39,47,253,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "Копировать",IDC_BUTTON_COPY,37,105,56,17
-    PUSHBUTTON      "set title",IDC_BUTTON_SET_TITLE,100,104,56,17
+    DEFPUSHBUTTON   "ОК",IDOK,64,100,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,118,100,50,14
+    COMBOBOX        IDC_COMBO1,7,7,223,91,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
 END
 
 
@@ -77,9 +72,9 @@ BEGIN
     IDD_DIALOG1, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 323
+        RIGHTMARGIN, 230
         TOPMARGIN, 7
-        BOTTOMMARGIN, 148
+        BOTTOMMARGIN, 122
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -94,16 +89,6 @@ IDD_DIALOG1 AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Icon
-//
-
-// Icon with lowest ID value placed first to ensure application icon
-// remains consistent on all systems.
-IDI_ICON1               ICON                    "C:\\Users\\dorog\\Downloads\\23_icon-icons.com_55003.ico"
 
 #endif    // Русский (Россия) resources
 /////////////////////////////////////////////////////////////////////////////
