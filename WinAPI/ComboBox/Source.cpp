@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+п»ї#define _CRT_SECURE_NO_WARNINGS
 #include <Windows.h>
 #include <cstdio>
 #include <winapifamily.h>
@@ -9,7 +9,7 @@ CONST CHAR* string[] =
 	"English", "Russian", "French"
 };
 
-CHAR sz_language[] = "Выбирите язык";
+CHAR sz_language[] = "Р’С‹Р±РёСЂРёС‚Рµ СЏР·С‹Рє";
 
 BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -50,7 +50,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			HWND hComboBox = GetDlgItem(hwnd, IDC_COMBO1);
 			int index = SendMessage(hComboBox, CB_GETCURSEL, 0, 0);
 			SendMessage(hComboBox, CB_GETLBTEXT, index, (LPARAM)sz_buffer);
-			sprintf(sz_message, " Язык приложения будет -  %s . Вы подтверждаете?", sz_buffer);
+			sprintf(sz_message, " РЇР·С‹Рє РїСЂРёР»РѕР¶РµРЅРёСЏ Р±СѓРґРµС‚ -  %s . Р’С‹ РїРѕРґС‚РІРµСЂР¶РґР°РµС‚Рµ?", sz_buffer);
 			MessageBox(hwnd, sz_message, "language", MB_YESNO | MB_ICONQUESTION);
 		}
 		break;
