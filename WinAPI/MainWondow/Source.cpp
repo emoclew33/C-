@@ -30,7 +30,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	//СОЗДАНИЕ ОКНА
 	int width = GetSystemMetrics(SM_CXSCREEN) - 100;
-	int height = GetSystemMetrics(SM_CYSCREEN);
+	int height = GetSystemMetrics(SM_CYSCREEN) - 100;
 	HWND hwnd = CreateWindowEx
 		(
 			NULL,						  // Ex - style
