@@ -30,15 +30,15 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	//СОЗДАНИЕ ОКНА
 	int width = GetSystemMetrics(SM_CXSCREEN) - 100;
-	int height = GetSystemMetrics(SM_CYSCREEN) - 100;
+	int height = GetSystemMetrics(SM_CYSCREEN);
 	HWND hwnd = CreateWindowEx
 		(
 			NULL,						  // Ex - style
 			g_szClassName,				  // имя класса окна
 			"Main Window",				  // заголовок окна
 			WS_OVERLAPPEDWINDOW,		  // стиль окна. У главного окна приложения стиль всегда WS_OVERLAPPEDWINDOW
-			(GetSystemMetrics(SM_CXSCREEN) >> 1) - ((width >> 1)),
-			(GetSystemMetrics(SM_CYSCREEN) >> 1) - ((height >> 1)), // размер окна
+			(GetSystemMetrics(SM_CXSCREEN) >> 1) - (width >> 1),
+			(GetSystemMetrics(SM_CYSCREEN) >> 1) - (height >> 1), // размер окна
 			width, height,
 			NULL,						  // родительское окно
 			NULL,						  // окна
